@@ -4,7 +4,6 @@ from datetime import datetime
 from flask import redirect
 
 
-
 app = Flask(__name__)
 app.secret_key = "secretkey"
 
@@ -82,6 +81,21 @@ def my_requests():
         "SELECT * FROM requests WHERE requester='user'"
     ).fetchall()
     return render_template("my_requests.html", requests=data)
+
+@app.route("/update-status", methods=["POST"])
+def update_status():
+    req_id = request.form["request_id"]
+    new_status = request.form["status"]
+
+    db = get_db()
+    db.execute(
+        "UPDATE requests SET status=? WHERE id=?",
+        (new_status, req_id)
+    )
+    db.commit()
+
+    return redirect("/admin")
+
 
 
 if __name__ == "__main__":

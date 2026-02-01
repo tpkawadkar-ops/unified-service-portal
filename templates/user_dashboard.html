@@ -1,27 +1,128 @@
-<h2>User Dashboard</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - Unified Service Management Portal</title>
 
-<p>Welcome, User</p>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+    }
 
-<h3>Submit Service Request</h3>
-<form method="post" action="/submit">
-    <input name="title" placeholder="Request Title" required><br><br>
+    header {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
 
-    <select name="category">
-        <option>IT</option>
-        <option>Maintenance</option>
-        <option>HR</option>
-    </select><br><br>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
+    }
 
-    <select name="priority">
+    .card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      padding: 25px;
+      width: 350px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #2575fc;
+      margin-bottom: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #2575fc;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #1a5edb;
+    }
+
+    .link-btn {
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #2575fc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  Unified Service Management Portal
+</header>
+
+<div class="container">
+
+  <!-- Submit Request Card -->
+  <div class="card">
+    <h3>Submit a Request</h3>
+
+    <!-- 🔗 CONNECTED TO FLASK -->
+    <form method="post" action="/submit">
+
+      <input type="text" name="title" placeholder="Request Title" required>
+
+      <input type="text" name="category" placeholder="Category" required>
+
+      <select name="priority" required>
+        <option value="">Select Priority</option>
         <option>Low</option>
         <option>Medium</option>
         <option>High</option>
-    </select><br><br>
+      </select>
 
-    <button type="submit">Submit Request</button>
-</form>
+      <button type="submit">Submit</button>
+    </form>
 
-<hr>
+    <!-- 🔗 CLICKABLE LINK -->
+    <a class="link-btn" href="/my-requests">📄 View My Requests</a>
+  </div>
 
-<!-- THIS IS THE CLICKABLE LINK -->
-<a href="/my-requests" style="font-size:16px;">📄 My Requests</a>
+</div>
+
+</body>
+</html>
