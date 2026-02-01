@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
+from datetime import datetime
+from flask import redirect
+
 
 
 app = Flask(__name__)
@@ -29,8 +32,35 @@ def login():
 @app.route("/dashboard")
 def dashboard():
     if session.get("role") == "admin":
-        return render_template("admin_dashboard.html")
+        return redirect("/admin")
     return render_template("user_dashboard.html")
+
+
+@app.route("/submit", methods=["POST"])
+def submit_request():
+    db = get_db()
+    db.execute("""
+        INSERT INTO requests
+        (title, category, priority, status, requester, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (
+        request.form["title"],
+        request.form["category"],
+        request.form["priority"],
+        "Submitted",
+        "user",
+        datetime.now()
+    ))
+    db.commit()
+    return redirect("/dashboard")
+
+@app.route("/admin")
+def admin_view():
+    db = get_db()
+    requests_data = db.execute("SELECT * FROM requests").fetchall()
+    return render_template("admin_dashboard.html", requests=requests_data)
+
+
 
 
 if __name__ == "__main__":

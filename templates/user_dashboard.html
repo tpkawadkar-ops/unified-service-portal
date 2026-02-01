@@ -1,2 +1,20 @@
 <h2>User Dashboard</h2>
-<p>Welcome User</p>
+
+<h3>Submit Service Request</h3>
+<form method="post" action="/submit">
+    <input name="title" placeholder="Request Title" required><br><br>
+
+    <select name="category">
+        <option>IT</option>
+        <option>Maintenance</option>
+        <option>HR</option>
+    </select><br><br>
+
+    <select name="priority">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+    </select><br><br>
+
+    <button type="submit">Submit Request</button>
+</form>

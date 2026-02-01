@@ -1,2 +1,12 @@
 <h2>Admin Dashboard</h2>
-<p>Welcome Admin</p>
+
+<h3>All Service Requests</h3>
+
+{% for r in requests %}
+<p>
+<b>{{ r[1] }}</b> |
+{{ r[2] }} |
+{{ r[3] }} |
+{{ r[4] }}
+</p>
+{% endfor %}
