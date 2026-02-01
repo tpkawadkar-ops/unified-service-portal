@@ -57,8 +57,23 @@ def submit_request():
 @app.route("/admin")
 def admin_view():
     db = get_db()
-    requests_data = db.execute("SELECT * FROM requests").fetchall()
-    return render_template("admin_dashboard.html", requests=requests_data)
+
+    # Fetch all requests
+    requests_data = db.execute(
+        "SELECT * FROM requests"
+    ).fetchall()
+
+    # Fetch count of requests by status
+    counts = db.execute(
+        "SELECT status, COUNT(*) FROM requests GROUP BY status"
+    ).fetchall()
+
+    return render_template(
+        "admin_dashboard.html",
+        requests=requests_data,
+        counts=counts
+    )
+
 
 @app.route("/my-requests")
 def my_requests():

@@ -1,5 +1,11 @@
 <h2>Admin Dashboard</h2>
 
+<h3>Status Summary</h3>
+
+{% for c in counts %}
+    <p>{{ c[0] }} : {{ c[1] }}</p>
+{% endfor %}
+
 <h3>All Service Requests</h3>
 
 {% for r in requests %}
