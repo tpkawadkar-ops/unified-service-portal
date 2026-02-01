@@ -1,39 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>User Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body { font-family: Segoe UI; background:#f0f2f5; margin:0; }
-    header { background:#2575fc; color:white; padding:20px; text-align:center; position:relative; }
-    header a { position:absolute; right:20px; top:20px; color:white; text-decoration:none; }
-    .card { background:white; padding:25px; width:350px; margin:40px auto; border-radius:12px; box-shadow:0 6px 15px rgba(0,0,0,.15); }
-    input, select, button { width:100%; padding:10px; margin-top:10px; }
-    button { background:#2575fc; color:white; border:none; }
-    a.link { display:block; text-align:center; margin-top:15px; text-decoration:none; color:#2575fc; }
+    /* ---------- Global ---------- */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3efe9; /* soft earthy background */
+      min-height: 100vh;
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      background: linear-gradient(135deg, #8b5e3c, #a97c50);
+      color: white;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+    }
+
+    header a {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    header a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- Layout ---------- */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 20px;
+    }
+
+    /* ---------- Card ---------- */
+    .card {
+      background: white;
+      width: 100%;
+      max-width: 420px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(139, 94, 60, 0.25);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #4b2e1e;
+      text-align: left;
+    }
+
+    /* ---------- Form ---------- */
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 14px;
+      border-radius: 8px;
+      border: 1px solid #cdb7a3;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #8b5e3c;
+      box-shadow: 0 0 0 2px rgba(139, 94, 60, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #8b5e3c;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    button:hover {
+      background-color: #744a2e;
+    }
+
+    /* ---------- Link ---------- */
+    .link {
+      display: block;
+      margin-top: 18px;
+      text-align: center;
+      color: #8b5e3c;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
 <body>
+
 <header>
   Unified Service Management Portal
   <a href="/logout">Logout</a>
 </header>
 
-<div class="card">
-  <h3>Submit Service Request</h3>
+<div class="container">
+  <div class="card">
+    <h3>Submit Service Request</h3>
 
-  <form method="post" action="/submit">
-    <input name="title" placeholder="Request Title" required>
-    <input name="category" placeholder="Category" required>
-    <select name="priority" required>
-      <option>Low</option>
-      <option>Medium</option>
-      <option>High</option>
-    </select>
-    <button type="submit">Submit</button>
-  </form>
+    <form method="post" action="/submit">
+      <input type="text" name="title" placeholder="Request Title" required>
+      <input type="text" name="category" placeholder="Category" required>
 
-  <a class="link" href="/my-requests">📄 My Requests</a>
+      <select name="priority" required>
+        <option value="">Select Priority</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <a class="link" href="/my-requests">📄 My Requests</a>
+  </div>
 </div>
+
 </body>
 </html>

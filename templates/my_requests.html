@@ -2,38 +2,113 @@
 <html>
 <head>
   <title>My Requests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body { font-family: Segoe UI; background:#f0f2f5; margin:0; }
-    header { background:#2575fc; color:white; padding:20px; text-align:center; position:relative; }
-    header a { position:absolute; right:20px; top:20px; color:white; text-decoration:none; }
-    table { width:90%; margin:40px auto; border-collapse:collapse; background:white; }
-    th, td { padding:12px; border-bottom:1px solid #ddd; }
-    th { background:#f7f7f7; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3efe9; /* soft earthy background */
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      background: linear-gradient(135deg, #8b5e3c, #a97c50);
+      color: white;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: 600;
+      position: relative;
+      text-align: center;
+    }
+
+    header a {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    header a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- Layout ---------- */
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* ---------- Card ---------- */
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 6px 15px rgba(139, 94, 60, 0.25);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #4b2e1e;
+      font-weight: 600;
+    }
+
+    /* ---------- Table ---------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #f7f2ec;
+      color: #4b2e1e;
+    }
   </style>
 </head>
 
 <body>
+
 <header>
-  My Requests
+  Unified Service Management Portal
   <a href="/logout">Logout</a>
 </header>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Category</th>
-    <th>Priority</th>
-    <th>Status</th>
-  </tr>
+<div class="container">
+  <div class="card">
+    <h3>My Requests</h3>
 
-  {% for r in requests %}
-  <tr>
-    <td>{{ r[1] }}</td>
-    <td>{{ r[2] }}</td>
-    <td>{{ r[3] }}</td>
-    <td>{{ r[4] }}</td>
-  </tr>
-  {% endfor %}
-</table>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Priority</th>
+        <th>Status</th>
+      </tr>
+
+      {% for r in requests %}
+      <tr>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
 </body>
 </html>
+
