@@ -81,7 +81,7 @@ def my_requests():
     data = db.execute(
         "SELECT * FROM requests WHERE requester='user'"
     ).fetchall()
-    return render_template("user_dashboard.html", requests=data)
+    return render_template("my_requests.html", requests=data)
 
 
 if __name__ == "__main__":

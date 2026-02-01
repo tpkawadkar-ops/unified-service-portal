@@ -1,0 +1,26 @@
+<h2>My Requests</h2>
+
+<a href="/dashboard">⬅ Back to Dashboard</a>
+<br><br>
+
+{% if requests %}
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+
+        {% for r in requests %}
+        <tr>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No requests submitted yet.</p>
+{% endif %}

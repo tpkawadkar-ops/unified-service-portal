@@ -1,5 +1,7 @@
 <h2>User Dashboard</h2>
 
+<p>Welcome, User</p>
+
 <h3>Submit Service Request</h3>
 <form method="post" action="/submit">
     <input name="title" placeholder="Request Title" required><br><br>
@@ -18,12 +20,8 @@
 
     <button type="submit">Submit Request</button>
 </form>
-<h3>My Requests</h3>
 
-{% if requests %}
-    {% for r in requests %}
-        <p>{{ r[1] }} | {{ r[4] }}</p>
-    {% endfor %}
-{% else %}
-    <p>No requests submitted yet.</p>
-{% endif %}
+<hr>
+
+<!-- THIS IS THE CLICKABLE LINK -->
+<a href="/my-requests" style="font-size:16px;">📄 My Requests</a>
