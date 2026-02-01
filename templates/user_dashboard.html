@@ -18,3 +18,12 @@
 
     <button type="submit">Submit Request</button>
 </form>
+<h3>My Requests</h3>
+
+{% if requests %}
+    {% for r in requests %}
+        <p>{{ r[1] }} | {{ r[4] }}</p>
+    {% endfor %}
+{% else %}
+    <p>No requests submitted yet.</p>
+{% endif %}

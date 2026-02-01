@@ -60,7 +60,13 @@ def admin_view():
     requests_data = db.execute("SELECT * FROM requests").fetchall()
     return render_template("admin_dashboard.html", requests=requests_data)
 
-
+@app.route("/my-requests")
+def my_requests():
+    db = get_db()
+    data = db.execute(
+        "SELECT * FROM requests WHERE requester='user'"
+    ).fetchall()
+    return render_template("user_dashboard.html", requests=data)
 
 
 if __name__ == "__main__":
