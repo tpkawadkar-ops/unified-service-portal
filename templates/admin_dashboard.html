@@ -1,172 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Unified Service Management Portal - Admin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>Admin Dashboard</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f2f5;
-      color: #333;
-    }
-
-    header {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .container {
-      padding: 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .summary {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-    }
-
-    .summary-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-      flex: 1;
-      min-width: 200px;
-      text-align: center;
-    }
-
-    .summary-card h2 {
-      margin: 0;
-      color: #2c5364;
-    }
-
-    .summary-card p {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    }
-
-    h3 {
-      margin-top: 0;
-      color: #2c5364;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f7f7f7;
-    }
-
-    select {
-      padding: 6px;
-      border-radius: 5px;
-    }
-
-    button {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: none;
-      background-color: #2c5364;
-      color: white;
-      cursor: pointer;
-      margin-left: 5px;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
+    body { font-family: Segoe UI; background:#f0f2f5; margin:0; }
+    header { background:#2c5364; color:white; padding:20px; text-align:center; position:relative; }
+    header a { position:absolute; right:20px; top:20px; color:white; text-decoration:none; }
+    .summary { display:flex; gap:20px; padding:20px; }
+    .card { background:white; padding:15px; flex:1; text-align:center; border-radius:10px; }
+    table { width:95%; margin:20px auto; border-collapse:collapse; background:white; }
+    th, td { padding:10px; border-bottom:1px solid #ddd; }
   </style>
 </head>
 
 <body>
-
 <header>
-  Unified Service Management Portal — Admin
+  Admin Dashboard
+  <a href="/logout">Logout</a>
 </header>
 
-<div class="container">
-
-  <!-- Summary Cards -->
-  <div class="summary">
-    {% for c in counts %}
-    <div class="summary-card">
-      <h2>{{ c[1] }}</h2>
-      <p>{{ c[0] }}</p>
-    </div>
-    {% endfor %}
-  </div>
-
-  <!-- Request Table -->
+<div class="summary">
+  {% for c in counts %}
   <div class="card">
-    <h3>Manage Service Requests</h3>
-
-    <table>
-      <tr>
-        <th>Title</th>
-        <th>Requester</th>
-        <th>Category</th>
-        <th>Priority</th>
-        <th>Status</th>
-        <th>Update</th>
-      </tr>
-
-      {% for r in requests %}
-      <tr>
-        <td>{{ r[1] }}</td>
-        <td>{{ r[5] }}</td>
-        <td>{{ r[2] }}</td>
-        <td>{{ r[3] }}</td>
-        <td>{{ r[4] }}</td>
-
-        <!-- 🔥 DROPDOWN STATUS UPDATE -->
-        <td>
-          <form method="post" action="/update-status">
-            <input type="hidden" name="request_id" value="{{ r[0] }}">
-
-            <select name="status">
-              <option value="Submitted" {% if r[4] == "Submitted" %}selected{% endif %}>Submitted</option>
-              <option value="In Progress" {% if r[4] == "In Progress" %}selected{% endif %}>In Progress</option>
-              <option value="Resolved" {% if r[4] == "Resolved" %}selected{% endif %}>Resolved</option>
-            </select>
-
-            <button type="submit">Update</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
-
+    <h2>{{ c[1] }}</h2>
+    <p>{{ c[0] }}</p>
   </div>
-
+  {% endfor %}
 </div>
 
+<table>
+  <tr>
+    <th>Title</th>
+    <th>User</th>
+    <th>Category</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th>Update</th>
+  </tr>
+
+  {% for r in requests %}
+  <tr>
+    <td>{{ r[1] }}</td>
+    <td>{{ r[5] }}</td>
+    <td>{{ r[2] }}</td>
+    <td>{{ r[3] }}</td>
+    <td>{{ r[4] }}</td>
+    <td>
+      <form method="post" action="/update-status">
+        <input type="hidden" name="request_id" value="{{ r[0] }}">
+        <select name="status">
+          <option {% if r[4]=='Submitted' %}selected{% endif %}>Submitted</option>
+          <option {% if r[4]=='In Progress' %}selected{% endif %}>In Progress</option>
+          <option {% if r[4]=='Resolved' %}selected{% endif %}>Resolved</option>
+        </select>
+        <button>Update</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
 </body>
 </html>
+

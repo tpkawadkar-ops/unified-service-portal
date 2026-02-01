@@ -1,128 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Dashboard - Unified Service Management Portal</title>
-
+  <title>User Dashboard</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f2f5;
-      color: #333;
-    }
-
-    header {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 30px;
-      gap: 20px;
-    }
-
-    .card {
-      background-color: #fff;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      padding: 25px;
-      width: 350px;
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: #2575fc;
-      margin-bottom: 15px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    textarea {
-      resize: vertical;
-    }
-
-    button {
-      padding: 12px 20px;
-      background-color: #2575fc;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background-color: #1a5edb;
-    }
-
-    .link-btn {
-      display: inline-block;
-      margin-top: 15px;
-      text-decoration: none;
-      color: #2575fc;
-      font-weight: bold;
-    }
+    body { font-family: Segoe UI; background:#f0f2f5; margin:0; }
+    header { background:#2575fc; color:white; padding:20px; text-align:center; position:relative; }
+    header a { position:absolute; right:20px; top:20px; color:white; text-decoration:none; }
+    .card { background:white; padding:25px; width:350px; margin:40px auto; border-radius:12px; box-shadow:0 6px 15px rgba(0,0,0,.15); }
+    input, select, button { width:100%; padding:10px; margin-top:10px; }
+    button { background:#2575fc; color:white; border:none; }
+    a.link { display:block; text-align:center; margin-top:15px; text-decoration:none; color:#2575fc; }
   </style>
 </head>
 
 <body>
-
 <header>
   Unified Service Management Portal
+  <a href="/logout">Logout</a>
 </header>
 
-<div class="container">
+<div class="card">
+  <h3>Submit Service Request</h3>
 
-  <!-- Submit Request Card -->
-  <div class="card">
-    <h3>Submit a Request</h3>
+  <form method="post" action="/submit">
+    <input name="title" placeholder="Request Title" required>
+    <input name="category" placeholder="Category" required>
+    <select name="priority" required>
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
 
-    <!-- 🔗 CONNECTED TO FLASK -->
-    <form method="post" action="/submit">
-
-      <input type="text" name="title" placeholder="Request Title" required>
-
-      <input type="text" name="category" placeholder="Category" required>
-
-      <select name="priority" required>
-        <option value="">Select Priority</option>
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-      </select>
-
-      <button type="submit">Submit</button>
-    </form>
-
-    <!-- 🔗 CLICKABLE LINK -->
-    <a class="link-btn" href="/my-requests">📄 View My Requests</a>
-  </div>
-
+  <a class="link" href="/my-requests">📄 My Requests</a>
 </div>
-
 </body>
 </html>
