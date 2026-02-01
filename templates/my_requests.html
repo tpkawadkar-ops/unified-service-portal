@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f3efe9; /* soft earthy background */
+      background-color: #f3efe9;
     }
 
     /* ---------- Header ---------- */
@@ -69,11 +69,48 @@
       border-bottom: 1px solid #ddd;
       text-align: left;
       font-size: 14px;
+      vertical-align: middle;
     }
 
     th {
       background-color: #f7f2ec;
       color: #4b2e1e;
+    }
+
+    /* ---------- Progress Bar ---------- */
+    .progress-bar {
+      background-color: #e5d6c8;
+      border-radius: 20px;
+      height: 14px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    .submitted {
+      width: 33%;
+      background-color: #c9a36a;
+    }
+
+    .in-progress {
+      width: 66%;
+      background-color: #8b5e3c;
+    }
+
+    .resolved {
+      width: 100%;
+      background-color: #4b2e1e;
+    }
+
+    .status-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: #4b2e1e;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -102,7 +139,18 @@
         <td>{{ r[1] }}</td>
         <td>{{ r[2] }}</td>
         <td>{{ r[3] }}</td>
-        <td>{{ r[4] }}</td>
+        <td>
+          <div class="progress-bar">
+            {% if r[4] == "Submitted" %}
+              <div class="progress submitted"></div>
+            {% elif r[4] == "In Progress" %}
+              <div class="progress in-progress"></div>
+            {% else %}
+              <div class="progress resolved"></div>
+            {% endif %}
+          </div>
+          <div class="status-text">{{ r[4] }}</div>
+        </td>
       </tr>
       {% endfor %}
     </table>
@@ -111,4 +159,3 @@
 
 </body>
 </html>
-
